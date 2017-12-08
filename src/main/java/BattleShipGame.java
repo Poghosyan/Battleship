@@ -1,4 +1,7 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class BattleShipGame {
     /*
@@ -24,7 +27,14 @@ public class BattleShipGame {
         }
     }
 
+    //TODO learn streams and use stream to get correct format of user input in coordinates
     static int[][] getInput(Scanner in) {
+        System.out.println("Please input the 5 positions you would like to shop at.");
+        System.out.println("Input format should look like so: 1, 1; 0, 3; 7, 3; 9, 11; 12, 17");
+        String input = in.nextLine();
+        Pattern.compile(";")
+                .splitAsStream(input)
+                .map(s -> new int[] {Integer.parseInt(s.charAt(0), Integer.parseInt(s.(3)));
         return null;
     }
 
