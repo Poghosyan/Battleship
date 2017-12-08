@@ -1,5 +1,5 @@
 public class Ocean {
-    private final int SHIP_COUNT = 13;
+    public static final int SHIP_COUNT = 13;
     private final int BOARD_DIMENSION = 20;
     Ship[][] ships = new Ship[BOARD_DIMENSION][BOARD_DIMENSION];
     int shotsFired;
