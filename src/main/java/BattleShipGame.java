@@ -1,7 +1,8 @@
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class BattleShipGame {
     /*
@@ -17,28 +18,64 @@ public class BattleShipGame {
         For example you can provide an instruction to the user as follows:
         The input format should look like this: 1, 1; 0, 3; 7, 3; 9, 11; 12, 17
     */
-    public static void Main(String[] args) {
+    public static void main(String[] args) {
         Ocean ocean = new Ocean();
         Scanner in = new Scanner(System.in);
-        int[][] inputArray = new int[5][2];
+        List<String> inputArray = new ArrayList<>();
+        boolean hitShip;
 
-        while(!isGameOver(ocean)) {
-            inputArray = getInput(in);
+        start:
+        {
+            setUpShips(ocean);
+
+            while (!isGameOver(ocean)) {
+                inputArray = getInput(in);
+
+                for (String s : inputArray) {
+                    hitShip = ocean.shootAt(Integer.parseInt(s.substring(0, 1)), Integer.parseInt(s.substring(3)));
+                    displayHitResult(hitShip);
+                    ocean.print();
+                }
+            }
+
+            System.out.println("The game is over!");
+            System.out.println("There were " + ocean.getShotsFired() + " shots fired");
+
+            System.out.println("Would you like to play again? (Y/N)");
+            String restart = in.next();
+
+            if (restart.equals("Y") || restart.equals("y")) {
+                ocean = new Ocean();
+                break start;
+            } else {
+                System.out.println("Thank you for playing.");
+            }
         }
     }
 
-    //TODO learn streams and use stream to get correct format of user input in coordinates
-    static int[][] getInput(Scanner in) {
+    private static void displayHitResult(boolean hitShip) {
+        if (hitShip) {
+            System.out.println("Hit");
+        } else {
+            System.out.println("Miss");
+        }
+    }
+
+    private static void setUpShips(Ocean ocean) {
+        ocean.placeAllShipsRandomly();
+    }
+
+    private static List<String> getInput(Scanner in) {
         System.out.println("Please input the 5 positions you would like to shop at.");
         System.out.println("Input format should look like so: 1, 1; 0, 3; 7, 3; 9, 11; 12, 17");
         String input = in.nextLine();
-        Pattern.compile(";")
+        List<String> coordinates = Pattern.compile(";")
                 .splitAsStream(input)
-                .map(s -> new int[] {Integer.parseInt(s.charAt(0), Integer.parseInt(s.(3)));
-        return null;
+                .collect(Collectors.toList());
+        return coordinates;
     }
 
-    static boolean isGameOver(Ocean ocean) {
+    private static boolean isGameOver(Ocean ocean) {
         return ocean.shipsSunk == ocean.SHIP_COUNT;
     }
 }
