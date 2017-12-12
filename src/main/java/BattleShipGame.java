@@ -17,6 +17,9 @@ public class BattleShipGame {
             setUpShips(ocean);
 
             while (!isGameOver(ocean)) {
+                System.out.println("Please input the 5 positions you would like to shop at.");
+                System.out.println("Input format should look like so: 1, 1; 0, 3; 7, 3; 9, 11; 12, 17");
+                //TODO Check inputs
                 inputArray = getInput(in);
                 for (String s : inputArray) {
                     hitShip = ocean.shootAt(Integer.parseInt(s.substring(0, 1)), Integer.parseInt(s.substring(3)));
@@ -52,8 +55,6 @@ public class BattleShipGame {
 
     //TODO Throw exception when user input doesn't match correct input, how should that case be handled?
     private static List<String> getInput(Scanner in) {
-        System.out.println("Please input the 5 positions you would like to shop at.");
-        System.out.println("Input format should look like so: 1, 1; 0, 3; 7, 3; 9, 11; 12, 17");
         String input = in.nextLine();
         List<String> coordinates = Pattern.compile(";")
                 .splitAsStream(input)
