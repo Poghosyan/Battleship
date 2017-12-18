@@ -10,6 +10,9 @@ public class OceanTest {
 
     @Test
     public void placeAllShipsRandomly() throws Exception {
+        Ocean ocean = new Ocean();
+        ocean.placeAllShipsRandomly();
+        Ship[][] ships = ocean.getShipArray();
     }
 
     @Test

@@ -84,7 +84,7 @@ public class Ocean {
      * @return
      */
     Ship[][] getShipArray() {
-        return new Ship[][] {};
+        return this.ships;
     }
 
     /**
