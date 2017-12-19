@@ -14,9 +14,9 @@ public class BattleShipGame {
 
         start:
         {
-            setUpShips(ocean);
+            ocean.placeAllShipsRandomly();
 
-            while (!isGameOver(ocean)) {
+            while (!ocean.isGameOver()) {
                 System.out.println("Please input the 5 positions you would like to shop at.");
                 System.out.println("Input format should look like so: 1, 1; 0, 3; 7, 3; 9, 11; 12, 17");
                 //TODO Check inputs
@@ -49,10 +49,6 @@ public class BattleShipGame {
         }
     }
 
-    private static void setUpShips(Ocean ocean) {
-        ocean.placeAllShipsRandomly();
-    }
-
     //TODO Throw exception when user input doesn't match correct input, how should that case be handled?
     private static List<String> getInput(Scanner in) {
         String input = in.nextLine();
@@ -60,9 +56,5 @@ public class BattleShipGame {
                 .splitAsStream(input)
                 .collect(Collectors.toList());
         return coordinates;
-    }
-
-    private static boolean isGameOver(Ocean ocean) {
-        return ocean.shipsSunk == ocean.SHIP_COUNT;
     }
 }

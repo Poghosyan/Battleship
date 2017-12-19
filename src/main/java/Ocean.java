@@ -2,16 +2,18 @@ public class Ocean {
     public static final int SHIP_COUNT = 13;
     private final int BOARD_DIMENSION = 20;
     Ship[][] ships = new Ship[BOARD_DIMENSION][BOARD_DIMENSION];
-    int shotsFired;
-    int hitCount;
-    int shipsSunk;
+    private int shotsFired;
+    private int hitCount;
+    private int shipsSunk;
 
     /**
      * The constructor. Creates an ”empty” ocean (fills the ships array with a bunch of EmptySea instances).
      * Also initializes any game variables, such as how many shots have been fired.
      */
     Ocean() {
-
+        shotsFired = 0;
+        hitCount = 0;
+        shipsSunk = 0;
     }
 
     /**
@@ -31,7 +33,7 @@ public class Ocean {
      * @return
      */
     boolean isOccupied(int row, int column) {
-        return false;
+        return ships[row][column].getLength() != 1;
     }
 
     /**
@@ -45,6 +47,11 @@ public class Ocean {
      * @return
      */
     boolean shootAt(int row, int column) {
+        shotsFired++;
+        if (ships[row][column].shootAt(row, column)) {
+            hitCount++;
+            return true;
+        }
         return false;
     }
 
@@ -52,7 +59,7 @@ public class Ocean {
      * @return Returns the number of shots fired (in this game).
      */
     int getShotsFired() {
-        return 0;
+        return shotsFired;
     }
 
     /**
@@ -62,21 +69,21 @@ public class Ocean {
      * @return
      */
     int getHitCount() {
-        return 0;
+        return hitCount;
     }
 
     /**
      * @return Returns the number of ships sunk (in this game).
      */
     int getShipsSunk() {
-        return 0;
+        return shipsSunk;
     }
 
     /**
      * @return Returns true if all ships have been sunk, otherwise false.
      */
     boolean isGameOver() {
-        return false;
+        return shipsSunk == SHIP_COUNT;
     }
 
     /**

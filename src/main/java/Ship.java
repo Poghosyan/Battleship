@@ -21,6 +21,10 @@ public abstract class Ship {
      */
     boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
         Ship[][] board = ocean.getShipArray();
+        if (horizontal && row + length > board.length || !horizontal && column + length > board.length) {
+            return false;
+        }
+
         for (int i = -1; i < 2; ++i) {
             if (!board[row + i][column - 1].getShipType().equals("empty")
                     || !board[row + i][column].getShipType().equals("empty")
@@ -43,7 +47,17 @@ public abstract class Ship {
      * @param ocean
      */
     void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
-
+        Ship[][] board = ocean.getShipArray();
+        this.bowRow = row;
+        this.bowColumn = column;
+        this.horizontal = horizontal;
+        for (int i = 0; i < length; ++i) {
+            if (horizontal) {
+                board[row][column + i] = this;
+            } else {
+                board[row + i][column] = this;
+            }
+        }
     }
 
     /**
@@ -92,23 +106,18 @@ public abstract class Ship {
      */
     @Override
     public String toString() {
-        return null;
+        if (isSunk()) {
+            return "x";
+        }
+        return "S";
     }
 
     public int getBowRow() {
         return bowRow;
     }
 
-    public void setBowRow(int bowRow) {
-        this.bowRow = bowRow;
-    }
-
     public int getBowColumn() {
         return bowColumn;
-    }
-
-    public void setBowColumn(int bowColumn) {
-        this.bowColumn = bowColumn;
     }
 
     public int getLength() {
@@ -121,17 +130,5 @@ public abstract class Ship {
 
     public boolean isHorizontal() {
         return horizontal;
-    }
-
-    public void setHorizontal(boolean horizontal) {
-        this.horizontal = horizontal;
-    }
-
-    public boolean[] getHit() {
-        return hit;
-    }
-
-    public void setHit(boolean[] hit) {
-        this.hit = hit;
     }
 }
