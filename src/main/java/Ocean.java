@@ -25,6 +25,7 @@ public class Ocean {
 
     /**
      * Returns true if the given location contains a ship, false if it does not.
+     *
      * @param row
      * @param column
      * @return
@@ -38,6 +39,7 @@ public class Ocean {
      * In addition, this method updates the number of shots that have been fired, and the number of hits. Note: If a
      * location contains a ”real” ship, shootAt should return true every time the user shoots at that same location.
      * Once a ship has been ”sunk”, additional shots at its location should return false.
+     *
      * @param row
      * @param column
      * @return
@@ -56,6 +58,7 @@ public class Ocean {
     /**
      * Returns the number of hits recorded (in this game). All hits are counted, not just the first time a given square
      * is hit.
+     *
      * @return
      */
     int getHitCount() {
@@ -81,6 +84,7 @@ public class Ocean {
      * able to look at the contents of this array; the placeShipAt method even needs to modify it. While it is
      * undesirable to allow methods in one class to directly access instance variables in another class, sometimes
      * there is just no good alternative.
+     *
      * @return
      */
     Ship[][] getShipArray() {
@@ -91,12 +95,12 @@ public class Ocean {
      * Prints the ocean. To aid the user, row numbers should be displayed along the left edge of the array, and column
      * numbers should be displayed along the top. Numbers should be 00 to 19, not 1 to 20.
      * The top left corner square should be 0, 0.
-     *
+     * <p>
      * Use ’S’ to indicate a location that you have fired upon and hit a (real) ship,
      * ’-’ to indicate a location that you have fired upon and found nothing there,
      * ’x’ to indicate a location containing a sunken ship,
      * and ’.’ (a period) to indicate a location that you have never fired upon.
-     *
+     * <p>
      * This is the only method in the Ocean class that does any input/output, and it is never called from within the
      * Ocean class (except possibly during debugging), only from the BattleshipGame class.
      */

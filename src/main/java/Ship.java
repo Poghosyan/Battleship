@@ -12,6 +12,7 @@ public abstract class Ship {
      * and returns false otherwise. The ship must not overlap another ship, or touch another ship (vertically,
      * horizontally, or diagonally), and it must not ”stick out” beyond the array. Do not actually change either the
      * ship or the Ocean, just says whether it is legal to do so.
+     *
      * @param row
      * @param column
      * @param horizontal
@@ -27,6 +28,7 @@ public abstract class Ship {
      * variables in the ship, and it also involves putting a reference to the ship in each of 1 or more locations
      * (up to 8) in the ships array in the Ocean object. (Note: This will be as many as eight identical references;
      * you can’t refer to a ”part” of a ship, only to the whole ship.)
+     *
      * @param row
      * @param column
      * @param horizontal
@@ -39,6 +41,7 @@ public abstract class Ship {
     /**
      * If a part of the ship occupies the given row and column, and the ship hasn’t been sunk, mark that part of the
      * ship as ”hit” (in the hit array, 0 indicates the bow) and return true, otherwise return false.
+     *
      * @param row
      * @param column
      * @return
@@ -49,6 +52,7 @@ public abstract class Ship {
 
     /**
      * Return true if every part of the ship has been hit, false otherwise.
+     *
      * @return true if every part of the ship has been hit, false otherwise
      */
     boolean isSunk() {
@@ -61,6 +65,7 @@ public abstract class Ship {
      * to print out locations in the ocean that have been shot at; it should not be used to print locations that have
      * not been shot at. Since toString behaves exactly the same for all ship types, it can be moved into the Ship
      * class.
+     *
      * @return Returns a single-character String to use in the Ocean’s print method.
      */
     @Override

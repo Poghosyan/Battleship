@@ -8,6 +8,7 @@ public class EmptySea extends Ship {
     /**
      * This method overrides shootAt(int row, int column) that is inherited from Ship, and always returns false to
      * indicate that nothing was hit.
+     *
      * @param row
      * @param column
      * @return always false
@@ -20,6 +21,7 @@ public class EmptySea extends Ship {
     /**
      * This method overrides isSunk() that is inherited from Ship, and always returns false to indicate that
      * you didn’t sink anything.
+     *
      * @return false
      */
     @Override
