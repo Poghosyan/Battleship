@@ -20,7 +20,15 @@ public abstract class Ship {
      * @return
      */
     boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
-        return false;
+        Ship[][] board = ocean.getShipArray();
+        for (int i = -1; i < 2; ++i) {
+            if (!board[row + i][column - 1].getShipType().equals("empty")
+                    || !board[row + i][column].getShipType().equals("empty")
+                    || !board[row + i][column + 1].getShipType().equals("empty")) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -47,6 +55,16 @@ public abstract class Ship {
      * @return
      */
     boolean shootAt(int row, int column) {
+        if (isSunk())
+            return false;
+
+        if (horizontal && bowRow == row && bowColumn + length >= column) {
+            hit[column] = true;
+            return true;
+        } else if (!horizontal && bowColumn == column && bowRow + length >= row) {
+            hit[row] = true;
+            return true;
+        }
         return false;
     }
 
@@ -56,7 +74,11 @@ public abstract class Ship {
      * @return true if every part of the ship has been hit, false otherwise
      */
     boolean isSunk() {
-        return false;
+        for (boolean partHit : hit) {
+            if (!partHit)
+                return false;
+        }
+        return true;
     }
 
     /**
