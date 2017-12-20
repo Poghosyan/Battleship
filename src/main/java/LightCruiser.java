@@ -3,6 +3,7 @@ public class LightCruiser extends Ship {
 
     public LightCruiser() {
         this.setLength(LENGTH);
+        this.hit = new boolean[LENGTH];
     }
 
     String getShipType() {

@@ -4,13 +4,15 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class OceanTest {
+    private Ocean ocean;
+
     @Before
     public void setUp() throws Exception {
+        this.ocean = new Ocean();
     }
 
     @Test
     public void placeAllShipsRandomly() throws Exception {
-        Ocean ocean = new Ocean();
         ocean.placeAllShipsRandomly();
         Ship[][] ships = ocean.getShipArray();
         for (int i = 0; i < ships.length; ++i) {
@@ -54,34 +56,35 @@ public class OceanTest {
 
     @Test
     public void isOccupied() throws Exception {
+        Ship[][] board = ocean.ships;
+
+        boolean occupied = ocean.isOccupied(0,0);
+        assertFalse(occupied);
+
+        board[0][1] = new Submarine();
+        occupied = ocean.isOccupied(0, 1);
+        assertTrue(occupied);
     }
 
     @Test
     public void shootAt() throws Exception {
-    }
+        Ship[][] board = ocean.ships;
 
-    @Test
-    public void getShotsFired() throws Exception {
-    }
+        boolean occupied = ocean.shootAt(0,0);
+        assertFalse(occupied);
+        assertEquals(1, ocean.getShotsFired());
 
-    @Test
-    public void getHitCount() throws Exception {
-    }
+        Ship sub = new Submarine();
+        sub.placeShipAt(0, 1, true, ocean);
+        occupied = ocean.shootAt(0, 1);
+        assertTrue(occupied);
+        assertEquals(2, ocean.getShotsFired());
+        assertEquals(1, ocean.getHitCount());
 
-    @Test
-    public void getShipsSunk() throws Exception {
+        occupied = ocean.shootAt(0, 2);
+        occupied = ocean.shootAt(0, 3);
+        assertEquals(4, ocean.getShotsFired());
+        assertEquals(3, ocean.getHitCount());
+        assertEquals(1, ocean.getShipsSunk());
     }
-
-    @Test
-    public void isGameOver() throws Exception {
-    }
-
-    @Test
-    public void getShipArray() throws Exception {
-    }
-
-    @Test
-    public void print() throws Exception {
-    }
-
 }

@@ -3,6 +3,7 @@ public class Submarine extends Ship {
 
     public Submarine() {
         this.setLength(LENGTH);
+        this.hit = new boolean[LENGTH];
     }
 
     String getShipType() {

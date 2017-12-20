@@ -3,6 +3,7 @@ public class BattleCruiser extends Ship {
 
     BattleCruiser() {
         this.setLength(LENGTH);
+        this.hit = new boolean[LENGTH];
     }
 
     String getShipType() {

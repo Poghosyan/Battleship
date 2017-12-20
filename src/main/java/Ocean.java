@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Ocean {
     public static final int SHIP_COUNT = 13;
     private final int BOARD_DIMENSION = 20;
@@ -14,15 +16,53 @@ public class Ocean {
         shotsFired = 0;
         hitCount = 0;
         shipsSunk = 0;
+        for (int i = 0; i < BOARD_DIMENSION; ++i) {
+            for (int j = 0; j < BOARD_DIMENSION; ++j) {
+                ships[i][j] = new EmptySea();
+            }
+        }
     }
 
     /**
      * Place all randomly on the (initially empty) ocean. Place larger ships before smaller ones, or you may end up
      * with no legal place to put a large ship. You will want to use the Random class in the java.util package,
      * so look that up in the Java API.
+     *
      */
     void placeAllShipsRandomly() {
+        Random random = new Random();
+        Ship[] shipsToPlace = initializeShips();
+        for (Ship ship : shipsToPlace) {
+            int row = random.nextInt(20);
+            int column = random.nextInt(20);
+            boolean horizontal = random.nextBoolean();
 
+            while (!ship.okToPlaceShipAt(row, column, horizontal, this)) {
+                row = random.nextInt(20);
+                column = random.nextInt(20);
+                horizontal = random.nextBoolean();
+            }
+
+            ship.placeShipAt(row, column, horizontal, this);
+        }
+    }
+
+    private Ship[] initializeShips() {
+        Ship[] shipsToPlace = new Ship[SHIP_COUNT];
+        shipsToPlace[0] = new BattleShip();
+        shipsToPlace[1] = new BattleCruiser();
+        shipsToPlace[2] = new Cruiser();
+        shipsToPlace[3] = new Cruiser();
+        shipsToPlace[4] = new LightCruiser();
+        shipsToPlace[5] = new LightCruiser();
+        shipsToPlace[6] = new Destroyer();
+        shipsToPlace[7] = new Destroyer();
+        shipsToPlace[8] = new Destroyer();
+        shipsToPlace[9] = new Submarine();
+        shipsToPlace[10] = new Submarine();
+        shipsToPlace[11] = new Submarine();
+        shipsToPlace[12] = new Submarine();
+        return shipsToPlace;
     }
 
     /**
@@ -49,6 +89,9 @@ public class Ocean {
     boolean shootAt(int row, int column) {
         shotsFired++;
         if (ships[row][column].shootAt(row, column)) {
+            if (ships[row][column].isSunk()) {
+                shipsSunk++;
+            }
             hitCount++;
             return true;
         }

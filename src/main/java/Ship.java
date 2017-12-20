@@ -3,7 +3,7 @@ public abstract class Ship {
     private int bowColumn;
     private int length;
     private boolean horizontal;
-    private boolean[] hit;
+    boolean[] hit;
 
     abstract String getShipType();
 
@@ -25,11 +25,19 @@ public abstract class Ship {
             return false;
         }
 
-        for (int i = -1; i < 2; ++i) {
-            if (!board[row + i][column - 1].getShipType().equals("empty")
-                    || !board[row + i][column].getShipType().equals("empty")
-                    || !board[row + i][column + 1].getShipType().equals("empty")) {
-                return false;
+        for (int j = 0; j < length; ++j) {
+            if (horizontal) {
+                column++;
+            } else {
+                row++;
+            }
+
+            for (int i = -1; i < 2; ++i) {
+                if (!board[row + i][column - 1].getShipType().equals("empty")
+                        || !board[row + i][column].getShipType().equals("empty")
+                        || !board[row + i][column + 1].getShipType().equals("empty")) {
+                    return false;
+                }
             }
         }
         return true;
@@ -73,10 +81,10 @@ public abstract class Ship {
             return false;
 
         if (horizontal && bowRow == row && bowColumn + length >= column) {
-            hit[column] = true;
+            hit[column - bowColumn] = true;
             return true;
         } else if (!horizontal && bowColumn == column && bowRow + length >= row) {
-            hit[row] = true;
+            hit[row - bowRow] = true;
             return true;
         }
         return false;

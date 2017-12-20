@@ -3,6 +3,7 @@ public class BattleShip extends Ship {
 
     public BattleShip() {
         this.setLength(LENGTH);
+        this.hit = new boolean[LENGTH];
     }
 
     String getShipType() {

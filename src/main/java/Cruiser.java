@@ -3,6 +3,7 @@ public class Cruiser extends Ship {
 
     public Cruiser() {
         this.setLength(LENGTH);
+        this.hit = new boolean[LENGTH];
     }
 
     String getShipType() {

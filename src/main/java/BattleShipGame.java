@@ -7,13 +7,13 @@ import java.util.stream.Collectors;
 public class BattleShipGame {
     //TODO Can we make this prettier?
     public static void main(String[] args) {
-        Ocean ocean = new Ocean();
         Scanner in = new Scanner(System.in);
         List<String> inputArray = new ArrayList<>();
         boolean hitShip;
 
         start:
         {
+            Ocean ocean = new Ocean();
             ocean.placeAllShipsRandomly();
 
             while (!ocean.isGameOver()) {
