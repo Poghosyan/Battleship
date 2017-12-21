@@ -30,15 +30,14 @@ public abstract class Ship {
 
         for (int i = row - 1; row < rowLength; ++i) {
             for (int j = column - 1; length < columnLength; ++j) {
-                if (row == 0)
+                if (i < 0)
                     break;
-                if (row == board.length - 1)
+                if (i > board.length - 1)
                     break;
                 if (j < 0)
                     continue;
                 if (j > board.length - 1)
-                    continue;
-                //TODO Finish rest of checks here
+                    break;
             }
         }
 
