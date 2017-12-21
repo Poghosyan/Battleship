@@ -155,6 +155,11 @@ public class Ocean {
      * Ocean class (except possibly during debugging), only from the BattleshipGame class.
      */
     void print() {
-        System.out.println("Please complete the methods");
+        for (int i = 0; i < BOARD_DIMENSION; ++i) {
+            for (int j = 0; j < BOARD_DIMENSION; ++j) {
+                System.out.print(" " + ships[i][j]);
+            }
+            System.out.println();
+        }
     }
 }

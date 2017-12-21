@@ -41,7 +41,7 @@ public class OceanTest {
                         assertTrue(ships[i + 1][j + 1].getShipType().equals("empty"));
                     }
 
-                    if (j != 0 && i != 0) {
+                    if (j != 0 && i != 0 && i != ships.length - 1) {
                         assertTrue(ships[i + 1][j - 1].getShipType().equals("empty"));
                     }
                 }

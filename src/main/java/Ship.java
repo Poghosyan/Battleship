@@ -21,15 +21,15 @@ public abstract class Ship {
      */
     boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
         Ship[][] board = ocean.getShipArray();
-        if (horizontal && row + length > board.length || !horizontal && column + length > board.length) {
+        if (!horizontal && row + length > board.length || horizontal && column + length > board.length) {
             return false;
         }
 
-        int rowLength = horizontal ? length + row : 3;
-        int columnLength = !horizontal ? length + column : 3;
+        int rowLength = !horizontal ? length + row + 1 : row + 1;
+        int columnLength = horizontal ? length + column + 1 : column + 1;
 
-        for (int i = row - 1; row < rowLength; ++i) {
-            for (int j = column - 1; length < columnLength; ++j) {
+        for (int i = row - 1; i <= rowLength; ++i) {
+            for (int j = column - 1; j <= columnLength; ++j) {
                 if (i < 0)
                     break;
                 if (i > board.length - 1)
@@ -38,6 +38,9 @@ public abstract class Ship {
                     continue;
                 if (j > board.length - 1)
                     break;
+                if (ocean.isOccupied(i, j)) {
+                    return false;
+                }
             }
         }
 
