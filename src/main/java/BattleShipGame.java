@@ -22,7 +22,8 @@ public class BattleShipGame {
                 //TODO Check inputs
                 inputArray = getInput(in);
                 for (String s : inputArray) {
-                    hitShip = ocean.shootAt(Integer.parseInt(s.substring(0, 1)), Integer.parseInt(s.substring(3)));
+                    String[] points = s.split(",");
+                    hitShip = ocean.shootAt(Integer.parseInt(points[0].trim()), Integer.parseInt(points[1].trim()));
                     displayHitResult(hitShip);
                     ocean.print();
                 }
@@ -54,6 +55,7 @@ public class BattleShipGame {
         String input = in.nextLine();
         List<String> coordinates = Pattern.compile(";")
                 .splitAsStream(input)
+                .map(String::trim)
                 .collect(Collectors.toList());
         return coordinates;
     }
