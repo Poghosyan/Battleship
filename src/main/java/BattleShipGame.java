@@ -22,7 +22,8 @@ public class BattleShipGame {
                 //TODO Check inputs
                 inputArray = getInput(in);
                 for (String s : inputArray) {
-                    hitShip = ocean.shootAt(Integer.parseInt(s.substring(0, 1)), Integer.parseInt(s.substring(3)));
+                    s = s.trim();
+                    hitShip = ocean.shootAt(Integer.parseInt(s.substring(0, 1)), Integer.parseInt(s.substring(3).trim()));
                     displayHitResult(hitShip);
                     ocean.print();
                 }
