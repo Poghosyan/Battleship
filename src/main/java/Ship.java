@@ -25,21 +25,23 @@ public abstract class Ship {
             return false;
         }
 
-        for (int j = 0; j < length; ++j) {
-            if (horizontal) {
-                column++;
-            } else {
-                row++;
-            }
+        int rowLength = horizontal ? length + row : 3;
+        int columnLength = !horizontal ? length + column : 3;
 
-            for (int i = -1; i < 2; ++i) {
-                if (!board[row + i][column - 1].getShipType().equals("empty")
-                        || !board[row + i][column].getShipType().equals("empty")
-                        || !board[row + i][column + 1].getShipType().equals("empty")) {
-                    return false;
-                }
+        for (int i = row - 1; row < rowLength; ++i) {
+            for (int j = column - 1; length < columnLength; ++j) {
+                if (row == 0)
+                    break;
+                if (row == board.length - 1)
+                    break;
+                if (j < 0)
+                    continue;
+                if (j > board.length - 1)
+                    continue;
+                //TODO Finish rest of checks here
             }
         }
+
         return true;
     }
 
